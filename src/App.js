@@ -70,6 +70,7 @@ function App() {
     const playlistCurrentItem = player.getPlaylistIndex();
     const video = player.getPlaylistItem(playlistCurrentItem);
     console.log('onTime==>', playlistCurrentItem, video);
+    
     setTitle(video.title);
     // const endtime = playlist[0].endtime;
     // const starttime = playlist[0].starttime;
