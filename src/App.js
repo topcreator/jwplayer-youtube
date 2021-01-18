@@ -153,7 +153,7 @@ function App() {
   return (
     <div className="App" style={{width: '100%', textAlign: 'center', padding: 30}}>
       <h2>Test with YouTube Videos in Playlist:</h2>
-      <div style={{width: 1000}}>
+      <div>
         <ReactJWPlayer
           className="clip-jw-player"
           playerId="jw-player"
