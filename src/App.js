@@ -7,10 +7,18 @@ const playlist = [
   {
   default: true,
   endtime: 0,
-  file: "https://www.youtube.com/watch?v=PLXEuATXFrI",
+  file: "https://www.youtube.com/watch?v=5cLUJX82WIc",
   starttime: 0,
   status: true,
   title: " Purple Movie",
+},
+{
+  default: false,
+  endtime: 0,
+  file: "https://www.youtube.com/watch?v=PLXEuATXFrI",
+  starttime: 0,
+  status: true,
+  title: " Red Movie",
 },
 {
   default: false,
