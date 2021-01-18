@@ -47,31 +47,32 @@ const playlist = [{
 let player;
 function App() {
   const [title, setTitle] = React.useState('');
+  const [index, setIndex] = React.useState(-1);
   const onReady = () => {
-    console.log('onReady')
     player = window.jwplayer('jw-player');
-    console.log(player.getPlaylist());
+    console.log('loaded playlist===>', player.getPlaylist());
     // player.on('markersupdated', data => {
     //   if (player && typeof player.getMarkersVTT === 'function') {
     //     console.log(data.markers);
     //   }
     // });
-    player.on('beforeComplete', () => {
-      console.log('beforeComplete===>', player.getPlaylistIndex(), player.getPlaylist());
-      // player.next();
-      // document.querySelector('iframe.jw-video').style.display = 'none';
-      // document.querySelector('.jw-preview').style.display = 'block';
-    });
+    // player.on('beforeComplete', () => {
+    //   console.log('beforeComplete===>', player.getPlaylistIndex(), player.getPlaylist());
+    //   // player.next();
+    //   // document.querySelector('iframe.jw-video').style.display = 'none';
+    //   // document.querySelector('.jw-preview').style.display = 'block';
+    // });
   };
 
   const onTime = event => {
     // console.log('onTime===>', event);
     // const player = window.jwplayer('jw-player');
-    const playlistCurrentItem = player.getPlaylistIndex();
-    const video = player.getPlaylistItem(playlistCurrentItem);
-    console.log('onTime==>', playlistCurrentItem, video);
-    
+    const playlistCurrentIndex = player.getPlaylistIndex();
+    const video = player.getPlaylistItem(playlistCurrentIndex);
+    console.log('onTime==>', playlistCurrentIndex, video);
+
     setTitle(video.title);
+    setIndex(playlistCurrentIndex)
     // const endtime = playlist[0].endtime;
     // const starttime = playlist[0].starttime;
     // if(player) {
@@ -137,7 +138,8 @@ function App() {
   }, []);
 
   return (
-    <div className="App" style={{width: '100%', textAlign: 'center'}}>
+    <div className="App" style={{width: '100%', textAlign: 'center', padding: 30}}>
+      <h2>Test with YouTube Videos in Playlist:</h2>
       <div style={{width: 1000}}>
         <ReactJWPlayer
           className="clip-jw-player"
@@ -153,8 +155,15 @@ function App() {
       </div>
       {/* <button onClick={onUpdateMarkers}>update markers</button> */}
       <div style={{marginTop: 30, textAlign: "left"}}>
-        <strong>Title: </strong>
+        <strong>Title of the playing video: </strong>
         <span>{title}</span>
+      </div>
+      <div style={{marginTop: 30}}>
+        <ul>
+          {playlist.map((item, i) => <li className={i === index ? 'is-playing' : ''}>
+            {`${i}: ${item.title}`}
+          </li>)}
+        </ul>
       </div>
     </div>
   );
