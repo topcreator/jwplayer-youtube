@@ -7,7 +7,7 @@ const playlist = [{
   default: true,
   endtime: 0,
   // file: "https://www.dropbox.com/s/iy4gwh9t3efm0uh/MIN_05907_HD%20-%20Moxy%20Fruvous%20Interview.mp4?raw=1",
-  file: "https://youtube.com/watch?v=HhuGQUZJot8",
+  file: "https://youtube.com/watch?v=wOSv1TIa58M",
   image: "https://rockpeaksassets.s3.amazonaws.com/files/eggs/k/Keys-Alicia/192730-Keys-Alicia-Un-thinkable-Im-Ready-Promo-Videos-from-2010-2010.jpg",
   starttime: 0,
   status: true,
@@ -133,6 +133,18 @@ function App() {
   //   },
   // };
 
+  const onNext = () => {
+    player.next();
+  }
+
+  const onPrev = () => {
+    player.playlistItem(index - 1);
+  }
+
+  const onPlay = i => {
+    player.playlistItem(i);
+  }
+
   React.useEffect(() => {
     player = window.jwplayer('jw-player');
   }, []);
@@ -155,13 +167,21 @@ function App() {
       </div>
       {/* <button onClick={onUpdateMarkers}>update markers</button> */}
       <div style={{marginTop: 30, textAlign: "left"}}>
+        <button onClick={onPrev} style={{marginRight: 30}} disabled={index <= 0}>
+          Prev
+        </button>
+        <button onClick={onNext} style={{marginRight: 30}} disabled={index >= playlist.length - 1}>
+          Next
+        </button>
+      </div>
+      <div style={{marginTop: 30, textAlign: "left"}}>
         <strong>Title of the playing video: </strong>
         <span>{title}</span>
       </div>
       <div style={{marginTop: 30}}>
         <ul>
-          {playlist.map((item, i) => <li className={i === index ? 'is-playing' : ''}>
-            {`${i}: ${item.title}`}
+          {playlist.map((item, i) => <li key={item.title} className={i === index ? 'is-playing' : ''} onClick={() => onPlay(i)}>
+            {`${i + 1}: ${item.title}`}
           </li>)}
         </ul>
       </div>
